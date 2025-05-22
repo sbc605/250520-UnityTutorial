@@ -16,6 +16,8 @@ public class ProgrammerB : MonoBehaviour
         //pA.number4 = 40;
 
         //pA.number5 = 50;
+
+        Debug.Log("number2의 값은" + pA.number2 + "이다.");
             
     }
 }

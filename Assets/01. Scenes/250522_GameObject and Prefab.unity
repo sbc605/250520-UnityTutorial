@@ -693,7 +693,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7162189373560887247, guid: 21d9731d1e65dba49a189663042aeebc, type: 3}
   firePos: {fileID: 1780674771}
   timer: 0
-  cooldownTime: 0.3
+  cooldownTime: 0.2
 --- !u!1 &698525097
 GameObject:
   m_ObjectHideFlags: 0

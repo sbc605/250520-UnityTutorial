@@ -5,7 +5,7 @@ public class StudyGameObject : MonoBehaviour
 {
     public GameObject prefab;
     
-    void Start()
+    void Awake()
     {
        CreateCharacter();
 

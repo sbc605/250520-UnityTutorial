@@ -10,7 +10,7 @@ public class StudyTransform : MonoBehaviour
     {
         //// 월드 방향으로 이동하는 기능
         // transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
-        //transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
 
 
         //// 로컬 방향으로 이동하는 기능

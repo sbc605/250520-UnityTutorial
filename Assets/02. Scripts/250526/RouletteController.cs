@@ -42,7 +42,7 @@ public class RouletteController : MonoBehaviour
             {
                 rotSpeed = 0f;
                 isStop = false;
-                isStop = false;
+                isRotating = false;
             }
         }
     }

@@ -5,6 +5,8 @@ public class Movement2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
+    public static int coinCount;
+
     void Update()
     {
         //// 딱 떨어지는 값(누르면 1, -1)

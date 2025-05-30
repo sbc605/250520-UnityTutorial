@@ -928,13 +928,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2116124344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abdfb88a4d87d804487ae484e67dcbb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0637fe9c4d673064280d01ce04a8ff06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderers: []
   moveSpeed: 2
   jumpPower: 5
+  playerMaxJump: 3
+  jumpCount: 0
   isGround: 0
+  isLeft: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

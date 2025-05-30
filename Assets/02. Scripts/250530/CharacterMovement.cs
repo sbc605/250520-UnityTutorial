@@ -12,6 +12,7 @@ public class CharacterMovement : MonoBehaviour
     private float h;
 
     public bool isGround;
+    private int jumpCount;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class CharacterMovement : MonoBehaviour
         /* 트랜스폼 이동
         transform.position ~
         transform.Translate (~)
-    }   */
+       */
 
     private void FixedUpdate()
     {
@@ -40,24 +41,33 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        isGround = true;
+        if (other.gameObject.CompareTag("Ground"))
+        {
 
-        renderers[2].gameObject.SetActive(false);
+        isGround = true;
+        jumpCount = 0;
+
+        renderers[2].gameObject.SetActive(false); // 한번 실행되는거라 여기에
+
+        }        
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        if (other.gameObject.CompareTag("Ground"))
+        {
         isGround = false;
-
+        
         renderers[0].gameObject.SetActive(false); // Idle
         renderers[1].gameObject.SetActive(false); // Run
         renderers[2].gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
     /// 캐릭터 움직임에 따라 이미지의 Flip 상태가 변하는 코드
     /// </summary>
-    void Move()
+    void Move()  
     {
 
         if (!isGround)
@@ -105,12 +115,16 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (Input.GetButtonDown("Jump")) // Input.GetKeyDown(KeyCode.Spac)
+        if (Input.GetButtonDown("Jump") && jumpCount < 2) // Input.GetKeyDown(KeyCode.Spac)
         {
             characterRb.AddForceY(jumpPower, ForceMode2D.Impulse);
             // characterRb.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
 
-            renderers[2].gameObject.SetActive(true); // Jump
+            jumpCount++;
+
+            renderers[2].gameObject.SetActive(true); // Jump                       
+            
+
         }
     }
 }

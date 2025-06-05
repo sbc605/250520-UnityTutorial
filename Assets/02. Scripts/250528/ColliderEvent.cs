@@ -1,22 +1,29 @@
 using UnityEngine;
 
-public class ColliderEvent : MonoBehaviour
+namespace GameOver
 {
-    //void OnCollisionEnter(Collision other)
-    //{
-    //    Debug.Log("Collision Enter");
-    //}
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("Trigger Enter");
-    //}
-
-    void OnCollisionEnter2D(Collision2D other)
+    public class ColliderEvent : MonoBehaviour
     {
-        if (other.gameObject.CompareTag("Player"))
+        /*void OnCollisionEnter(Collision other)
+        //{
+        //    Debug.Log("Collision Enter");
+        //}
+
+        //void OnTriggerEnter(Collider other)
+        //{
+        //    Debug.Log("Trigger Enter");
+        }*/
+
+        public GameObject fadeUI;
+
+        void OnCollisionEnter2D(Collision2D other)
         {
-            Debug.Log("Game Over");
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Game Over");
+                fadeUI.SetActive(true);
+            }
         }
     }
+
 }

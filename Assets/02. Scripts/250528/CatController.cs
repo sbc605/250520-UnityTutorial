@@ -7,18 +7,17 @@ public class CatController : MonoBehaviour
 
     Rigidbody2D catRb;
     Animator catAnim;
-    public float jumpPower = 10f;
+    public float jumpPower = 30f;
+    public float limitPower = 19f;
 
     public bool isGround = false;
     public int jumpCount = 0;
-    /// 자연스러운 점프를 위한 속도 제한
-    /// public float limitPower = 7f;
 
     void Start()
     {
         catRb = GetComponent<Rigidbody2D>();
         catAnim = GetComponent<Animator>();
-        
+
     }
 
     void Update()
@@ -31,30 +30,27 @@ public class CatController : MonoBehaviour
         // 스페이스 키 입력
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
         {
-          catAnim.SetTrigger("Jump");
-          catAnim.SetBool("isGround", false);
+            catAnim.SetTrigger("Jump");
+            catAnim.SetBool("isGround", false);
 
             catRb.AddForceY(jumpPower, ForceMode2D.Impulse);
-          jumpCount++;
+            jumpCount++;
 
             soundManager.OnJumpSound();
+
+            if (catRb.linearVelocityY > limitPower)
+                catRb.linearVelocityY = limitPower;
         }
 
-        /* 자연스러운 점프를 위한 속도 제한
-        if (catRb.linearVelocityY > limitPower) 
-        {
-            catRb.linearVelocityY = limitPower;
-        }
-        */
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-         jumpCount = 0;
-         //isGround = true;
-         catAnim.SetBool("isGround", true);
+            jumpCount = 0;
+            //isGround = true;
+            catAnim.SetBool("isGround", true);
         }
     }
 

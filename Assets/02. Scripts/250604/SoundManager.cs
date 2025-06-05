@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace Cat
 {
-
     public class SoundManager : MonoBehaviour
     {
+        public GameObject fadeUI;
+
         public AudioSource audioSource;
         public AudioClip jumpClip;
         public AudioClip bgmClip;
@@ -28,7 +29,14 @@ namespace Cat
         public void OnJumpSound()
         {
             audioSource.PlayOneShot(jumpClip); // 이벤트 사운드
+        }
 
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                audioSource.Stop();
+            }
         }
 
     }

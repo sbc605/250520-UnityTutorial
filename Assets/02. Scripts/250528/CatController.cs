@@ -1,5 +1,6 @@
 using UnityEngine;
-using Cat; // 사운드 매니저가 있는 namespace
+using Cat;
+using Unity.VisualScripting; // 사운드 매니저가 있는 namespace
 
 public class CatController : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class CatController : MonoBehaviour
 
     void Update()
     {
-        Jump();
+        Jump();        
     }
 
     void Jump()
@@ -39,8 +40,12 @@ public class CatController : MonoBehaviour
             soundManager.OnJumpSound();
 
             if (catRb.linearVelocityY > limitPower)
-                catRb.linearVelocityY = limitPower;
+            catRb.linearVelocityY = limitPower;
         }
+
+        var catRotation = transform.eulerAngles;
+        catRotation.z = catRb.linearVelocity.y * 2.5f;
+        transform.eulerAngles = catRotation;
 
     }
 

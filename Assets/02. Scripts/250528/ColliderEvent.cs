@@ -24,6 +24,7 @@ namespace GameOver
                 fadeUI.SetActive(true);
             }
         }
+
     }
 
 }

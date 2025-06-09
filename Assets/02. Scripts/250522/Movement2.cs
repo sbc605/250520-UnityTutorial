@@ -31,4 +31,5 @@ public class Movement2 : MonoBehaviour
 
         //transform.position += normalDir * moveSpeed * Time.deltaTime;
     }
+
 }

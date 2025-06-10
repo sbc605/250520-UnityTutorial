@@ -8,35 +8,38 @@ namespace Cat
 
         public AudioSource audioSource;
         public AudioClip jumpClip;
-        public AudioClip bgmClip;
+        public AudioClip playBgmClip;
+        public AudioClip introBgmClip;
+        public AudioClip colliderClip;
 
-        private void Start()
-        {
-            SetBGMSound();
-        }
 
-        public void SetBGMSound()
+        public void SetBGMSound(string bgmName)
         {
-            audioSource.clip = bgmClip; // 오디오 소스에 사운드 파일 설정
-            audioSource.playOnAwake = true; // 반복
+            if (bgmName == "Intro")
+            {
+                audioSource.clip = introBgmClip;
+            }
+            else if (bgmName == "Play")
+            {
+                audioSource.clip = playBgmClip;
+            }
+
             audioSource.loop = true; // 시작할 때 자동재생
             audioSource.volume = 0.1f; // 소리 음량
 
             audioSource.Play(); // 시작
 
+            // audioSource.playOnAwake = true; // 반복
         }
 
         public void OnJumpSound()
         {
-            audioSource.PlayOneShot(jumpClip); // 이벤트 사운드
+            audioSource.PlayOneShot(jumpClip);
         }
 
-        void OnCollisionEnter2D(Collision2D other)
+        public void OnColliderSound()
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                audioSource.Stop();
-            }
+            audioSource.PlayOneShot(colliderClip);
         }
 
     }

@@ -15,7 +15,7 @@ public class Study_Switch : MonoBehaviour
 
     int Calculation() // 계산하는 함수
     {
-        int value;
+        // int value;
 
         switch (calculationType)
         {

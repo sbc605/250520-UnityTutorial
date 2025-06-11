@@ -9,7 +9,7 @@ public class ItemEvent : MonoBehaviour
     public GameObject pipe;
     public GameObject apple;
 
-    public float moveSpeed = 3f;
+    public float moveSpeed = 0.1f;
     public float returnPosX = 15f;
     public float randomPosY;
     private float PosZ = 9f;

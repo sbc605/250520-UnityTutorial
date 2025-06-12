@@ -22,6 +22,8 @@ namespace cat
             var endingClip = isHappy ? vClips[0] : vClips[1]; // isHappy는 bool값
             vPlayer.clip = endingClip;
             vPlayer.Play();
+
+            Debug.Log("영상 시작");
         }
     }
 }

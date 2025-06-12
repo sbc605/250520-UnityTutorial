@@ -14,9 +14,16 @@ public class ItemEvent : MonoBehaviour
     public float randomPosY;
     private float PosZ = 9f;
 
-    void Start() 
+    private Vector3 initPos;
+
+    private void Awake()
     {
-        SetRandomSetting(transform.position.x);
+        initPos = transform.localPosition;
+    }
+
+    private void OnEnable()
+    {
+        SetRandomSetting(initPos.x);
     }
 
     void Update()

@@ -22,11 +22,17 @@ public class CatController : MonoBehaviour
 
     public int jumpCount = 0;
 
-    void Start()
+    void Awake()
     {
         catRb = GetComponent<Rigidbody2D>();
         catAnim = GetComponent<Animator>();
+    }
 
+    private void OnEnable()
+    {
+        transform.localPosition = new Vector3(-7.52f, 0.72f, 0f);
+        GetComponent<CircleCollider2D>().enabled = true;
+        soundManager.audioSource.Play();
     }
 
     void Update()
@@ -69,7 +75,7 @@ public class CatController : MonoBehaviour
             if (GameManager.score == 10)
             {
                 fadeUI.SetActive(true);
-                fadeUI.GetComponent<FadePanel>().OnFade(2f, Color.white);
+                fadeUI.GetComponent<FadePanel>().OnFade(2f, Color.white, true); // 2초 페이드
                 GetComponent<CircleCollider2D>().enabled = false; // 자신의 콜라이더 끄는 기능
 
                 // Invoke("HappyVideo", 4f);
@@ -90,7 +96,7 @@ public class CatController : MonoBehaviour
 
             gameOverUI.SetActive(true); // 게임 오버 켜기
             fadeUI.SetActive(true); // 페이드 켜기
-            fadeUI.GetComponent<FadePanel>().OnFade(2f, Color.black); // 페이드 실행
+            fadeUI.GetComponent<FadePanel>().OnFade(2f, Color.black, true); // 페이드 실행
             GetComponent<CircleCollider2D>().enabled = false;
 
             // Invoke("SadVideo", 4f);
@@ -105,17 +111,22 @@ public class CatController : MonoBehaviour
         }
     }
 
-    IEnumerator EndingRoutine(bool isHappy)
+    IEnumerator EndingRoutine(bool isHappy) // 현재 페이드 중
     {
-        yield return new WaitForSeconds(2.5f); // 뒤에 적힌 값만큼 대기
-        videoManager.VideoPlay(isHappy);
+        yield return new WaitForSeconds(2.5f); // 페이드 중 2.5f 대기   
+        
+        videoManager.VideoPlay(isHappy); // 영상 재생 시작
+        yield return new WaitForSeconds(1f); // 1초 대기
 
-        // yield return new WaitUntil(() => videoManager.vPlayer.isPlaying); // 뒤에 적힌 bool값이 true가 될 때까지 대기
+        soundManager.audioSource.Stop();
+        var newColor = isHappy ? Color.white : Color.black; // 페이드를 서서히 품
+        fadeUI.GetComponent<FadePanel>().OnFade(2f, newColor, false); // 페이드를 끈 시점
 
+        yield return new WaitForSeconds(2.5f);
         fadeUI.SetActive(false);
         gameOverUI.SetActive(false);
 
-        soundManager.audioSource.mute = true;
+        transform.parent.gameObject.SetActive(false); // PLAY 그룹 Off
     }
 
     /*

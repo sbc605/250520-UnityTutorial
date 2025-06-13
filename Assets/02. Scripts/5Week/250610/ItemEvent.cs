@@ -66,7 +66,23 @@ public class ItemEvent : MonoBehaviour
                 pipe.SetActive(true);
                 apple.SetActive(true);
                 break;
-
         }
+
+        /* 정수형으로 형변환
+        switch ((int)colliderType)
+        {
+            case 0:
+                pipe.SetActive(true);
+                break;
+
+            case 1:
+                apple.SetActive(true);
+                break;
+
+            case 2:
+                pipe.SetActive(true);
+                apple.SetActive(true);
+                break;
+        } */
     }
 }

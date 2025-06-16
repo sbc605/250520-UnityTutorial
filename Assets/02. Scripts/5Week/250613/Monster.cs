@@ -1,18 +1,84 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public abstract class Monster : MonoBehaviour, IDamageable
 {
-    //int number1 = 1;
-    //float number2 = 10.5f;
-    //int number3 = 50;
-    //string str1 = "안녕하세요";
+    /* 생성자 예시
+    public string name;
+    public float damage;
+    public float hp;
 
-    //void Start()
-    //{
-    //    number1 = (int)number2; // 명시적 형변환
-    //    Debug.Log(number1);
+    public Monster()
+    {
+        this.name = "슬라임";
+        this.damage = 1;
+        this.hp = 1;
+    }
 
-    //    number3 = str1;
-    //}
+    public Monster(string name)
+    {
+        this.name = name;
+        this.damage = 1;
+        this.hp = 1;
+    }
+
+    public Monster(string name, float damage)
+    {
+        this.name = name;
+        this.damage = damage;
+        this.hp = 1;
+    }
+
+    // Monster 클래스의 생성자
+    public Monster(string name, float damage, float hp)
+    {
+        this.name = name;
+        this.damage = damage;
+        this.hp = hp;
+    }
+
+
+    void Start()
+    {
+        Monster m1 = new Monster(); // 이건 이름 슬라임 나옴
+        Monster m2 = new Monster("슬라임킹");
+        Monster m3 = new Monster("슬라임킹", 3f);
+        Monster m4 = new Monster("고블린", 2f, 3f);
+    } */
+
+    /* 오버라이드 예시
+    public override void Attack()
+    {
+        Debug.Log("Monster 공격");
+    }
+
+    public override void Move()
+    {
+        Debug.Log("Monster 이동");
+    } */
+
+    public float hp;
+    public abstract void SetHealth();
+
+    void Start()
+    {
+        SetHealth();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        hp -= damage;
+        if (hp <= 0f)
+        {
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        Debug.Log("몬스터 다운");
+    }
 }
+
+

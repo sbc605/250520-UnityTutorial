@@ -147,16 +147,16 @@ public class Study_Casting : MonoBehaviour
         /// 크라켄.AllAttack();
 
 
-        Monster m = new Monster();
+        // Monster m = new Monster();
         // Orc o = m; // 이렇게 적으면 암시적 형변환 되지않아서 에러
         // Orc o = (Orc)m; // 명시적 형변환 > 에러
 
-        Orc o = m as Orc; // 성공시 형변환, 실패시 null
+        /* Orc o = m as Orc; // 성공시 형변환, 실패시 null
 
         if (o != null)
             Debug.Log(o);
 
         else // if (o == null)
-            Debug.Log("형변환 되지 않음"); // null 뜸
+            Debug.Log("형변환 되지 않음"); // null 뜸 */
     }
 }

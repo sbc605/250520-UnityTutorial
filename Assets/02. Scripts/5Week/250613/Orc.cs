@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Orc : Monster
+public class Orc : MonoBehaviour
 {
     /* void Start()
     {
@@ -27,8 +27,8 @@ public class Orc : Monster
         Debug.Log("Attack");
     } */
     
-    public override void SetHealth()
+    /* public override void SetHealth()
     {
         hp = 100f;
-    }
+    } */
 }

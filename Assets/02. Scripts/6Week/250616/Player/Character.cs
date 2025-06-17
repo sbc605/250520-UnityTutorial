@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
         {
             IDropItem item = other.GetComponent<IDropItem>(); // 지역변수 생성
 
-            item.Grab(); // 아이템 획득
+            // item.Grab(); // 아이템 획득
 
             currentItem = item; // 현재 아이템 장착
         }

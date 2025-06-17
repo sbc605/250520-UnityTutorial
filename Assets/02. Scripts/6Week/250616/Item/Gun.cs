@@ -2,19 +2,32 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour, IDropItem
 {
-    public void Use()
+    public GameObject bulletPrefab;
+    public Transform shootPos;
+
+    public void Grab(Transform grabPos)
     {
-        Debug.Log("ÃÑÀ» ¹ß»çÇÑ´Ù.");  
+        transform.SetParent(grabPos);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+        Debug.Log("ÃÑÀ» ÁÖ¿ü´Ù.");
     }
 
-    public void Grab()
+    public void Use()
     {
-        Destroy(gameObject);
-        Debug.Log("ÃÑÀ» ÁÖ¿ü´Ù.");
+        GameObject bullet = Instantiate(bulletPrefab, shootPos.position, Quaternion.identity); // ÇÁ¸®ÆÕÀ» ³ÖÀ¸¸é ¿øÁ¡¿¡¼­ »ý¼º
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+
+        bulletRb.AddForce(shootPos.forward * 100f, ForceMode.Impulse);
+
+        Debug.Log("ÃÑÀ» ¹ß»çÇÑ´Ù.");
     }
 
     public void Drop()
     {
+        transform.SetParent(null);
+        transform.localPosition = Vector3.zero;
         Debug.Log("ÃÑÀ» ¹ö·È´Ù.");
     }
 }

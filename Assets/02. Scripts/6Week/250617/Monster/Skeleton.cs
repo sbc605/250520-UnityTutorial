@@ -8,8 +8,8 @@ public class Skeleton : Monster2
         moveSpeed = 1f;
     }
 
-    public override void Attack()
-    {
-        Debug.Log("한손검 휘두르기");
-    }
+    //public override void Attack()
+    //{
+    //    Debug.Log("한손검 휘두르기");
+    //}
 }

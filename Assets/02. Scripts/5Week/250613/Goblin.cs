@@ -8,10 +8,10 @@ public class Goblin : Monster2
         moveSpeed = 3f;
     }
 
-    public override void Attack()
-    {
-        Debug.Log("대거");
-    }
+    //public override void Attack()
+    //{
+    //    Debug.Log("대거");
+    //}
 
 
 }

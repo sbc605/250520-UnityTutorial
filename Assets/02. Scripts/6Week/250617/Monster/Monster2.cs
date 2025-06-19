@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Monster2 : MonoBehaviour
 {
     private SpriteRenderer sRenderer;
+
     private Animator animator;
     private bool isMove = true;
     private bool isHit = false;
@@ -12,19 +13,24 @@ public abstract class Monster2 : MonoBehaviour
     [SerializeField] protected float moveSpeed = 3f;
 
     private int dir = 1; // 방향값
+    public int Dir
+    {
+        get { return dir; }
+        set { dir = value; }
+    }
 
-    public SpawnManager spawner;
+    private SpawnManager spawner;
 
 
     public abstract void Init();
 
-    void Start()
+    void Awake()
     {
         spawner = FindFirstObjectByType<SpawnManager>();
         sRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
-        Init();
+        Init();        
     }
 
     void OnMouseDown() // 마우스 클릭했을 때 반응(유니티 제공 함수) 콜라이더 있어야함
@@ -40,7 +46,6 @@ public abstract class Monster2 : MonoBehaviour
 
     private void Move()
     {
-
         if (!isMove)
             return;
 
@@ -56,9 +61,19 @@ public abstract class Monster2 : MonoBehaviour
             dir = 1;
             sRenderer.flipX = false;
         }
+
+        SetFlip(dir);
     }
 
-    IEnumerator Hit(float damage)
+    public void SetFlip(int dir)
+    {
+        if (dir > 0)
+            sRenderer.flipX = false;
+        else
+            sRenderer.flipX = true;
+    }
+
+    public IEnumerator Hit(float damage)
     {
         if (isHit)
             yield break;
@@ -85,10 +100,5 @@ public abstract class Monster2 : MonoBehaviour
         yield return new WaitForSeconds(0.65f);
         isHit = false;
         isMove = true;
-    }
-
-    public virtual void Attack()
-    {
-
     }
 }

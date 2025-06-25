@@ -8,7 +8,8 @@ public class KnightController_Keyboard : MonoBehaviour
     private Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 30f;
-    private bool isGround = true;
+    private bool isGround, isCombo, isAttack;
+    float atkDamage = 3f;
 
     void Start()
     {
@@ -19,6 +20,8 @@ public class KnightController_Keyboard : MonoBehaviour
     void Update() // 일반적인 작업
     {
         InputKeyboard();
+        Jump();
+        Attack();
     }
 
     void FixedUpdate() // 물리적인 작업
@@ -51,14 +54,17 @@ public class KnightController_Keyboard : MonoBehaviour
 
         inputDir = new Vector3(h, v, 0);
 
-        Jump();
-        SetAnimation();
+        animator.SetFloat("JoystickX", inputDir.x);
+        animator.SetFloat("JoystickY", inputDir.y);
     }
 
     void Move()
     {
         if (inputDir.x != 0)
         {
+            var scaleX = inputDir.x > 0 ? 1 : -1;
+            transform.localScale = new Vector3(scaleX, 1, 1);
+
             knightRb.linearVelocityX = inputDir.x * moveSpeed;
         }
     }
@@ -72,18 +78,42 @@ public class KnightController_Keyboard : MonoBehaviour
         }
     }
 
-    void SetAnimation()
+    void Attack()
     {
-        if (inputDir.x != 0)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            animator.SetBool("isRun", true);
+            if (!isAttack) // 기본값이 false여서 이게 실행됨
+            {
+                isAttack = true;
+                atkDamage = 3f;
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                isCombo = true; // 연속 콤보를 할건지 확인하는 용도
+            }
+        }
 
-            var scaleX = inputDir.x > 0 ? 1 : -1;
-            transform.localScale = new Vector3(scaleX, 1, 1);
-        }
-        else if (inputDir.x == 0)
+    }
+
+    public void WaitCombo()
+    {
+        if (isCombo)
         {
-            animator.SetBool("isRun", false);
+            atkDamage = 5f;
+            animator.SetBool("isCombo", true);
         }
+
+        else
+        {
+            animator.SetBool("isCombo", false);
+            isAttack = false;
+        }
+    }
+
+    public void EndCombo()
+    {
+        isAttack = false;
+        isCombo = false;
     }
 }

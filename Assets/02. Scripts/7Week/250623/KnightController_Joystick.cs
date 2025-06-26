@@ -6,22 +6,23 @@ public class KnightController_Joystick : MonoBehaviour
     private Animator animator;
     private Rigidbody2D knightRb;
 
-    [SerializeField] private Button jumpButton;
-    [SerializeField] private Button attackButton;
+    // [SerializeField] private Button jumpButton;
+    // [SerializeField] private Button attackButton;
 
     private Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float jumpPower = 30f;
-    private bool isGround, isCombo, isAttack;
-    float atkDamage = 3f;
+    // [SerializeField] private float jumpPower = 30f;
+    // private bool isGround, isCombo, isAttack;
+    // float atkDamage = 3f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         knightRb = GetComponent<Rigidbody2D>();
 
+        /*
         jumpButton.onClick.AddListener(Jump);
-        attackButton.onClick.AddListener(Attack);
+        attackButton.onClick.AddListener(Attack); */
     }
 
     void FixedUpdate() // 물리적인 작업
@@ -29,6 +30,27 @@ public class KnightController_Joystick : MonoBehaviour
         Move();
     }
 
+
+    public void InputJoystick(float x, float y)
+    {
+        inputDir = new Vector3(x, y, 0).normalized;
+
+        animator.SetFloat("JoystickX", inputDir.x);
+        animator.SetFloat("JoystickY", inputDir.y);
+    }
+
+
+    void Move()
+    {
+        if (inputDir.x != 0)
+        {
+            var scaleX = inputDir.x > 0 ? 1 : -1;
+            transform.localScale = new Vector3(scaleX, 1, 1);
+
+            knightRb.linearVelocity = inputDir * moveSpeed;
+        }
+    }
+    /*
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -53,28 +75,9 @@ public class KnightController_Joystick : MonoBehaviour
         {
             Debug.Log($"{atkDamage}로 공격");
         }
-    }
+    } */
 
-    public void InputJoystick(float x, float y)
-    {
-        inputDir = new Vector3(x, y, 0).normalized;
-
-        animator.SetFloat("JoystickX", inputDir.x);
-        animator.SetFloat("JoystickY", inputDir.y);
-    }
-
-
-    void Move()
-    {
-        if (inputDir.x != 0)
-        {
-            var scaleX = inputDir.x > 0 ? 1 : -1;
-            transform.localScale = new Vector3(scaleX, 1, 1);
-
-            knightRb.linearVelocityX = inputDir.x * moveSpeed;
-        }
-    }
-
+    /*
     void Jump()
     {
         if (isGround)
@@ -118,7 +121,7 @@ public class KnightController_Joystick : MonoBehaviour
     {
         isAttack = false;
         isCombo = false;
-    }
+    } */
 
     /* 요약 버전
     void Attack()

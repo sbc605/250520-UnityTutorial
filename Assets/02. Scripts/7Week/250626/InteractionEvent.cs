@@ -6,11 +6,13 @@ public class InteractionEvent : MonoBehaviour
     public enum InteractionType { Sign, Door, NPC }
     public InteractionType type;
 
+    public SoundController soundController;
+
     public GameObject popup, map, house;
     public FadeRoutine fade;
 
     public Vector3 inDoorPos, outDoorPos;
-    public bool isHouse;
+    public bool inHouse;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -48,31 +50,28 @@ public class InteractionEvent : MonoBehaviour
 
     IEnumerator DoorRoutine(Transform player)
     {
+        soundController.EventSoundPlay("Door Open");
+
         yield return StartCoroutine(fade.Fade(3f, Color.black, true));
 
-        map.SetActive(isHouse);
-        house.SetActive(!isHouse);
+        map.SetActive(inHouse);
+        house.SetActive(!inHouse);
 
-        var pos = isHouse ? outDoorPos : inDoorPos;
+        if (inHouse) // 집 > 밖        
+            soundController.BgmSoundPlay("Town");      
+        
+        else if (!inHouse) // 밖 > 집
+            soundController.BgmSoundPlay("House");
+
+        var pos = inHouse ? outDoorPos : inDoorPos;
         player.transform.position = pos;
 
-        /*
-        if (!isHouse)
-        {
-            map.SetActive(false);
-            house.SetActive(true);
-            player.transform.position = inDoorPos;
-        }
-        else
-        {
-            map.SetActive(true);
-            house.SetActive(false);
-            player.transform.position = outDoorPos;
-        } */
+        inHouse = !inHouse;
 
-        isHouse = !isHouse;
+        soundController.EventSoundPlay("Door Close");
+
         yield return new WaitForSeconds(1f);
-
         yield return StartCoroutine(fade.Fade(3f, Color.black, false));
+
     }
 }

@@ -15,6 +15,7 @@ TagManager:
   - GameOver
   - Apple
   - Pipe
+  - Ladder
   layers:
   - Default
   - TransparentFX

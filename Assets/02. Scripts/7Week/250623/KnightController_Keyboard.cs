@@ -5,10 +5,10 @@ public class KnightController_Keyboard : MonoBehaviour
     private Animator animator;
     private Rigidbody2D knightRb;
 
-    private Vector3 inputDir;
+    public Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 30f;
-    private bool isGround, isCombo, isAttack;
+    private bool isGround, isCombo, isAttack, isLadder;
     float atkDamage = 3f;
 
     void Start()
@@ -35,7 +35,7 @@ public class KnightController_Keyboard : MonoBehaviour
         {
             animator.SetBool("isGround", true);
             isGround = true;
-        }
+        }        
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -44,6 +44,26 @@ public class KnightController_Keyboard : MonoBehaviour
         {
             animator.SetBool("isGround", false);
             isGround = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            isLadder = true;
+            knightRb.gravityScale = 0f;
+            knightRb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            knightRb.gravityScale = 3f;
+            knightRb.linearVelocity = Vector2.zero;
         }
     }
 
@@ -56,6 +76,15 @@ public class KnightController_Keyboard : MonoBehaviour
 
         animator.SetFloat("JoystickX", inputDir.x);
         animator.SetFloat("JoystickY", inputDir.y);
+
+        if (inputDir.y < 0)
+        {
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.5f, 0.7f);
+        }
+        else
+        {
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.5f, 1.5f);
+        }
     }
 
     void Move()
@@ -66,6 +95,12 @@ public class KnightController_Keyboard : MonoBehaviour
             transform.localScale = new Vector3(scaleX, 1, 1);
 
             knightRb.linearVelocityX = inputDir.x * moveSpeed;
+        }
+
+        // Clime
+        if (isLadder && inputDir.y != 0)
+        {
+            knightRb.linearVelocityY = inputDir.y * moveSpeed;
         }
     }
 

@@ -16,6 +16,7 @@ TagManager:
   - Apple
   - Pipe
   - Ladder
+  - Return
   layers:
   - Default
   - TransparentFX

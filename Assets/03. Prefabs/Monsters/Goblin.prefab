@@ -124,9 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b0e733af55a6a4aac24d349aa84258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterState: 0
   hp: 3
-  moveSpeed: 3
-  spawner: {fileID: 0}
+  speed: 0
+  target: {fileID: 0}
 --- !u!58 &2366500522248338902
 CircleCollider2D:
   m_ObjectHideFlags: 0

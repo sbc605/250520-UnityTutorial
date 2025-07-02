@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5462064320426453765}
   - component: {fileID: 5584023756638253337}
   - component: {fileID: -580660049722822876}
+  - component: {fileID: -6102301828495353861}
   m_Layer: 10
   m_Name: Blue Coin
   m_TagString: Untagged
@@ -160,9 +161,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4252983770490280612}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e64beeac7c45d814e84394d47592dcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coinType: 2
+  price: 0
+--- !u!114 &-6102301828495353861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252983770490280612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6bd447c4fcf56b40aed9ad05d27dd56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

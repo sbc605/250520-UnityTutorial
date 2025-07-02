@@ -1,20 +1,30 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class KnightController_Keyboard : MonoBehaviour
+public class KnightController_Keyboard : MonoBehaviour, IDamageable
 {
     private Animator animator;
     private Rigidbody2D knightRb;
+    private Collider2D knightColl;
+    public Image hpBar;
 
     public Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 30f;
+    
     private bool isGround, isCombo, isAttack, isLadder;
-    float atkDamage = 3f;
+    private float atkDamage = 3f;
+    public float maxHP = 100f;
+    public float currHp;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         knightRb = GetComponent<Rigidbody2D>();
+        knightColl = GetComponent<Collider2D>();
+
+        currHp = maxHP;
+        hpBar.fillAmount = currHp / maxHP;
     }
 
     void Update() // 일반적인 작업
@@ -49,7 +59,16 @@ public class KnightController_Keyboard : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ladder"))
+        if (other.gameObject.CompareTag("Monster"))
+        {
+            if (other.GetComponent<IDamageable>() != null)
+            {
+                other.GetComponent<IDamageable>().TakeDamage(atkDamage);
+                other.GetComponent<Animator>().SetTrigger("Hit");
+            }
+        }
+
+            if (other.gameObject.CompareTag("Ladder"))
         {
             isLadder = true;
             knightRb.gravityScale = 0f;
@@ -77,13 +96,15 @@ public class KnightController_Keyboard : MonoBehaviour
         animator.SetFloat("JoystickX", inputDir.x);
         animator.SetFloat("JoystickY", inputDir.y);
 
-        if (inputDir.y < 0)
+        if (inputDir.y < 0) // 숙였을 때
         {
-            GetComponent<CapsuleCollider2D>().size = new Vector2(0.5f, 0.7f);
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.7f, 0.3f);
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(0, 0.4f);
         }
-        else
+        else // 서있을 때
         {
-            GetComponent<CapsuleCollider2D>().size = new Vector2(0.5f, 1.5f);
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.7f, 1.7f);
+            GetComponent<CapsuleCollider2D>().offset = new Vector2(0, 0.9f);
         }
     }
 
@@ -150,5 +171,23 @@ public class KnightController_Keyboard : MonoBehaviour
     {
         isAttack = false;
         isCombo = false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currHp -= damage;
+        hpBar.fillAmount = currHp / maxHP; // 현재 체력 / 최대 체력
+
+        if (currHp <= 0f)
+        {
+            Death();
+        }        
+    }
+
+    public void Death()
+    {
+        animator.SetTrigger("Death");
+        knightColl.enabled = false;
+        knightRb.gravityScale = 0f;
     }
 }

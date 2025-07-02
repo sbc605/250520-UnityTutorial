@@ -29,3 +29,6 @@ public class PotionItem : MonoBehaviour, IItem
         gameObject.SetActive(false);
     }
 }
+
+
+

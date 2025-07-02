@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9064753334749646334}
   - component: {fileID: 2108882904026970753}
   - component: {fileID: 6932151162983513110}
+  - component: {fileID: -6811208379377505740}
   m_Layer: 10
   m_Name: MP Potion
   m_TagString: Untagged
@@ -160,9 +161,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576819606600067596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 148d849e691173e488bdff5cdd409500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   potionType: 2
+--- !u!114 &-6811208379377505740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576819606600067596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6bd447c4fcf56b40aed9ad05d27dd56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

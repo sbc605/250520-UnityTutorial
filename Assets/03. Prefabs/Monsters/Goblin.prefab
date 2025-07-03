@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 6170096992393114695}
   m_Layer: 9
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,6 +234,8 @@ MonoBehaviour:
   speed: 0
   attackTime: 0
   atkDamage: 0
+  hpBar: {fileID: 4745518324153240459}
+  itemManager: {fileID: 0}
   target: {fileID: 0}
 --- !u!50 &4854025245727055019
 Rigidbody2D:
@@ -309,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9158931613190869768}
   m_Layer: 5
-  m_Name: '[Gruop] HP'
+  m_Name: '[Gruop] Goblin HP'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

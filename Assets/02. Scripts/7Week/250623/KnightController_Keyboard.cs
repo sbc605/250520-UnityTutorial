@@ -88,6 +88,8 @@ public class KnightController_Keyboard : MonoBehaviour, IDamageable
 
     void InputKeyboard()
     {
+        if (Time.timeScale == 0f) return;
+
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 

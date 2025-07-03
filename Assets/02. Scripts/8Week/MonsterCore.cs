@@ -9,8 +9,8 @@ public abstract class MonsterCore : MonoBehaviour, IDamageable
     public float hp, speed, attackTime;
     protected float moveDir;
     protected float targetDist;
-    
-    public float atkDamage;    
+
+    public float atkDamage;
 
     protected Animator animator;
     protected Rigidbody2D monsterRb;
@@ -40,7 +40,7 @@ public abstract class MonsterCore : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         monsterRb = GetComponent<Rigidbody2D>();
         monsterColl = GetComponent<Collider2D>();
-                
+
         itemManager = FindFirstObjectByType<ItemManager>();
     }
 
@@ -111,6 +111,14 @@ public abstract class MonsterCore : MonoBehaviour, IDamageable
         monsterColl.enabled = false;
         monsterRb.gravityScale = 0f;
 
-        itemManager.DropItem(transform.position); // 아이템을 생성할 위치
+        int itemCount = Random.Range(0, 3); // 최대 2개까지 떨어뜨릴 수 있다.
+
+        if (itemCount > 0) // 예외처리
+        {
+            for (int i = 0; i < itemCount; i++) // 0개가 나올 수 있어서 에러가 뜰 수 있음
+            {
+                itemManager.DropItem(transform.position); // 아이템을 생성할 위치
+            }
+        }               
     }
 }

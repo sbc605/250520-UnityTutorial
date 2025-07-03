@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01. Scenes/Knight/0. Town.unity
+    path: Assets/01. Scenes/Knight/0. Intro.unity
+    guid: 7c6429b07e6648c48b7b090a4ef1dde1
+  - enabled: 1
+    path: Assets/01. Scenes/Knight/1. Town.unity
     guid: 57cc3c0347633214d9703f6cff42d816
   - enabled: 1
-    path: Assets/01. Scenes/Knight/1. Adventure.unity
+    path: Assets/01. Scenes/Knight/2. Adventure.unity
     guid: dcf621c218305dd41acee352eb0f157f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
